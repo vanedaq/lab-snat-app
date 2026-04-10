@@ -54,12 +54,7 @@ app.MapGet("/storage", async (IConfiguration config) =>
     catch (Exception ex)
     {
         sw.Stop();
-        return Results.Problem(new ProblemDetails
-        {
-            Title = "Error en Storage",
-            Detail = ex.Message,
-            Extensions = { ["duration_ms"] = sw.ElapsedMilliseconds }
-        });
+        return Results.Ok(new { status = "ERROR", error = ex.Message, duration_ms = sw.ElapsedMilliseconds });
     }
 });
 
@@ -103,12 +98,7 @@ app.MapGet("/redis", async (IConfiguration config) =>
     catch (Exception ex)
     {
         sw.Stop();
-        return Results.Problem(new ProblemDetails
-        {
-            Title = "Error en Redis",
-            Detail = ex.Message,
-            Extensions = { ["duration_ms"] = sw.ElapsedMilliseconds }
-        });
+        return Results.Ok(new { status = "ERROR", error = ex.Message, duration_ms = sw.ElapsedMilliseconds });
     }
 });
 
